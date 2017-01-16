@@ -1,0 +1,4 @@
+<% unless flash[:error] %>
+	$("#myModal").modal("show")
+	$("#myModal > .modal-dialog > .modal-content").html("<%= j render :template => 'devise/sessions/new.html', :format => 'html' %>")
+<% end %>

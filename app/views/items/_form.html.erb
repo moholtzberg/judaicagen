@@ -1,0 +1,33 @@
+<%= form_for @item, :html => {:class => "form-horizontal", :multipart => true} do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+	  
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+	  <%= f.text_field :title %>
+	  <%= f.text_area :description %>
+	  <%= f.text_field :family_name %>
+	  <%= f.text_field :town_name %>
+	  
+	  <div class="field">
+	    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+	    <%= f.text_field :tag_list %>
+	  </div>
+	  
+	  <%= f.fields_for :item_images do |p| %>
+	       <div class="field">
+	         <%= p.label :image %><br>
+	         <%= p.file_field :image, :multiple => true, name: "images[image][]" %>
+	       </div>
+	     <% end %>
+    <%= f.submit %>
+  </div>
+<% end %>
