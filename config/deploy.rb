@@ -16,8 +16,7 @@ set :default_shell, '/bin/bash'
 set :shell, '/bin/bash'
 # default_environment["RAILS_ENV"] = 'production'
 # set :linked_files, %w{config/database.yml config/newrelic.yml app/views/spree/shared/_lucky_orange.html.erb public/google98548de7465bed0f.html}
-upload("#{RAILS_ROOT}/shared/test.txt", "#{current_path}/shared/test.txt")
-set :linked_files, %w{config/application.rb config/database.yml config/sunspot.yml}
+set :linked_files, %w{config/application.rb config/database.yml}
 # set :linked_dirs, %W{public/spree}
 
 task :init do
@@ -59,5 +58,15 @@ namespace :deploy do
   # task :restart do
   #   invoke 'unicorn:legacy_restart'
   # end
+  
+  
+  desc "Copy files"
+  task :copy_secrets do
+    on roles(:all) do |host|
+      %w[ app_secrets.yml ].each do |f|
+        upload! 'shared/' + f , 'judaicagen/shared/' + f
+      end
+    end
+  end
   
 end

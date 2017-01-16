@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-secret_file = Rails.env == "development" ? "../shared/app_secrets.yml"  : "../../shared/app_secrets.yml"
+secret_file = Rails.env == "development" ? "shared/app_secrets.yml"  : "shared/app_secrets.yml"
 puts "++++++++++++++#{secret_file}"
 SECRET = File.exists?(secret_file) ? YAML.load_file(secret_file) : {}
 puts "++++++++++++++#{SECRET.inspect}"
