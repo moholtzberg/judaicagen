@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20170116082239) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "images", force: :cascade do |t|
     t.integer "item_id"
     t.string  "image"
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 20170116082239) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "taggings", ["item_id"], name: "index_taggings_on_item_id"
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+  add_index "taggings", ["item_id"], name: "index_taggings_on_item_id", using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -76,9 +79,11 @@ ActiveRecord::Schema.define(version: 20170116082239) do
     t.datetime "locked_at"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
+  add_foreign_key "taggings", "items"
+  add_foreign_key "taggings", "tags"
 end
