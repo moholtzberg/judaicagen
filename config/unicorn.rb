@@ -1,6 +1,6 @@
 app_dir = "/home/rails/judaicagen/current"
 shared_dir = "/home/rails/judaicagen/shared"
-working_directory = app_dir
+working_directory app_dir
 
 # Set unicorn options
 worker_processes 4
