@@ -23,7 +23,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
 
-gem 'unicorn'
+gem 'unicorn', '~> 5.0.1'
 
 group :development, :test do
   gem 'byebug'
