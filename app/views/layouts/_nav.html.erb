@@ -33,11 +33,11 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome <%= current_user.user_name %> <span class="caret"></span></a>
 					
 					<ul class="dropdown-menu">
-						<li><%= link_to "My Listings", my_listings_path %></li>
+						<li><%= link_to "My Listings", my_listing_path %></li>
 						<li><a href="#">Another action</a></li>
 						<li><a href="#">Something else here</a></li>
 						<li role="separator" class="divider"></li>
-						<li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li
+						<li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
 					</ul>
 					
 				</li>
