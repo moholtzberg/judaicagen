@@ -2,8 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '4.2.4'
 
-gem 'sqlite3'
-gem 'pg', :group => :production
+gem 'pg', '~> 0.20', group: :production
 gem 'sass-rails', '~> 5.0'
 
 gem 'uglifier', '>= 1.3.0'
@@ -23,10 +22,10 @@ gem 'carrierwave', '~> 1.0'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
 
-gem 'unicorn', '~> 5.0.1'
-
 group :development, :test do
+  gem 'mysql'
   gem 'byebug'
+  gem 'unicorn', '~> 5.0.1'
 end
 
 group :development do

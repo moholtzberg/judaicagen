@@ -9,6 +9,7 @@ class Item < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :family_name
   validates_presence_of :town_name
+  validates_presence_of :price
   
   def self.lookup_location(term)
     where("lower(town_name) like (?)", "%#{term.downcase}%")
@@ -16,6 +17,10 @@ class Item < ActiveRecord::Base
   
   def self.lookup_family(term)
     where("lower(family_name) like (?)", "%#{term.downcase}%")
+  end
+
+  def self.lookup_price(term)
+    where("lower(price) like (?)", "%#{term.downcase}%")
   end
   
   def self.tagged_with(name)

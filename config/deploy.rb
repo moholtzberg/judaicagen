@@ -1,9 +1,9 @@
 set :user, "rails"
 set :use_sudo, false
 # set :application, "twenty-four-seven"
-set :repo_url, 'https://github.com/moholtzberg/judaicagen.git'
+set :repo_url, 'https://github.com/igor961/judaicagen.git'
 set :branch, "master"
-set :deploy_to, "/home/rails/judaicagen"
+# set :deploy_to, "/home/rails/judaicagen"
 
 set :log_level, :debug
 # set :rvm1_ruby_version, "ruby-2.1.5-p273"
@@ -11,7 +11,7 @@ set :ssh_options, {:forward_agent => true}
 set :pty, false
 set :deploy_via, :copy
 set :bundle, 'source $HOME/.bashrc && bundle'
-set :default_env, { rvm_bin_path: '/usr/local/rvm/rubies/ruby-2.2.1/bin/ruby' }
+# set :default_env, { rvm_bin_path: '/usr/local/rvm/rubies/ruby-2.2.1/bin/ruby' }
 set :default_shell, '/bin/bash'
 set :shell, '/bin/bash'
 # default_environment["RAILS_ENV"] = 'production'

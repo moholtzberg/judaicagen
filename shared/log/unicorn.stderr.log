@@ -1,0 +1,15 @@
+I, [2018-03-10T22:35:33.436571 #5586]  INFO -- : Refreshing Gem list
+I, [2018-03-10T22:35:44.209431 #5586]  INFO -- : listening on addr=/home/home/judaicagen/shared/sockets/unicorn.sock fd=11
+I, [2018-03-10T22:35:44.557592 #5595]  INFO -- : worker=0 ready
+I, [2018-03-10T22:35:44.559923 #5597]  INFO -- : worker=1 ready
+I, [2018-03-10T22:35:44.586494 #5601]  INFO -- : worker=2 ready
+I, [2018-03-10T22:35:44.588403 #5586]  INFO -- : master process ready
+I, [2018-03-10T22:35:44.605767 #5604]  INFO -- : worker=3 ready
+127.0.0.1 - - [10/Mar/2018:22:35:52 +0200] "GET / HTTP/1.0" 500 77332 1.2180
+127.0.0.1 - - [10/Mar/2018:22:36:25 +0200] "GET / HTTP/1.0" 500 77332 0.9183
+127.0.0.1 - - [10/Mar/2018:22:36:31 +0200] "GET / HTTP/1.0" 500 77332 0.5175
+I, [2018-03-10T22:37:42.375879 #5586]  INFO -- : reaped #<Process::Status: pid 5597 exit 0> worker=1
+I, [2018-03-10T22:37:42.596101 #5586]  INFO -- : reaped #<Process::Status: pid 5595 exit 0> worker=0
+I, [2018-03-10T22:37:42.697683 #5586]  INFO -- : reaped #<Process::Status: pid 5601 exit 0> worker=2
+I, [2018-03-10T22:37:42.698053 #5586]  INFO -- : reaped #<Process::Status: pid 5604 exit 0> worker=3
+I, [2018-03-10T22:37:42.698422 #5586]  INFO -- : master complete

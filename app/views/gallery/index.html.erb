@@ -16,6 +16,7 @@
 		
 		<div class="panel-footer">
 			Family Name: <%= link_to item.family_name, family_path(item.family_name) unless item.family_name.nil?%><br/>
+			Price: <%= raw item.price unless item.price.nil?%><br/>
 			Location: <%= link_to item.town_name, location_path(item.town_name) unless item.town_name.nil? %><br/>
 			Tags: <%= raw item.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><br/>
 			By: <%= link_to item.owner.user_name, owner_path(item.owner.user_name) unless (item.owner.nil? || item.owner.user_name.blank?) %>

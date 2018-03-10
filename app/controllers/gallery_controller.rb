@@ -5,6 +5,7 @@ class GalleryController < ApplicationController
   def index
     @items = Item.all
     @items = @items.lookup_location(params[:location]) if params[:location].present?
+    @items = @items.lookup_price(params[:price]) if params[:price].present?
     @items = @items.lookup_family(params[:family]) if params[:family].present?
     @items = @items.tagged_with(params[:tag]) if params[:tag].present?
     @items = @items.where(owner_id: User.find_by(user_name: params[:owner]).id) if params[:owner].present?
@@ -48,7 +49,7 @@ class GalleryController < ApplicationController
   end
   
   def listing_params
-    params.require(:item).permit(:title, :description, :town_name, :family_name, :tag_list, :images => [:id, :item_id, :image])
+    params.require(:item).permit(:title, :description, :town_name, :price, :family_name, :tag_list, {:images => [:id, :item_id, :image]})
   end
   
 end

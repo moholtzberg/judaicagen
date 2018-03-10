@@ -1,16 +1,46 @@
 default: &default
-  pool: 15
-  timeout: 5000
+  adapter: mysql
+  encoding: utf8
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-production:
-  <<: *default
-  adapter: <%= SECRET["DATABASE"]["PROD_ENGINE"] %>
-  host: <%= SECRET["DATABASE"]["PROD_HOST"] %>
-  database: <%= SECRET["DATABASE"]["PROD_DB"] %>
-  username: <%= SECRET["DATABASE"]["PROD_UN"] %>
-  password: <%= SECRET["DATABASE"]["PROD_PW"] %>
-  port: <%= SECRET["DATABASE"]["PROD_PORT"] %>
-  
 development:
+  adapter: mysql
+  encoding: utf8
+  pool: 5
+  database: judaicagen
+  username: root
+  password: igor
+
+test:
   <<: *default
-  database: db/development.sqlite3
+  database: judaicagen2_test
+
+# As with config/secrets.yml, you never want to store sensitive information,
+# like your database password, in your source code. If your source code is
+# ever seen by anyone, they now have access to your database.
+#
+# Instead, provide the password as a unix environment variable when you boot
+# the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
+# for a full rundown on how to provide these environment variables in a
+# production deployment.
+#
+# On Heroku and other platform providers, you may have a full connection URL
+# available as an environment variable. For example:
+#
+#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#
+# You can use this database configuration with:
+#
+#   production:
+#     url: <%= ENV['DATABASE_URL'] %>
+#
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: dau0hspkck9l89
+  pool: 5
+  username: hhkmeamtvhoxhu
+  password: c4fca540b0e8c977f0d637a0b1a9f0f93fe9a1221f79770f128e8c82989a6170
+  
