@@ -13,7 +13,6 @@ gem 'jquery-rails'
 gem "jquery-ui-rails"
 gem 'bootstrap-sass', '~> 3.3.5'
 
-
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
@@ -23,6 +22,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 gem 'devise'
 
 gem 'unicorn', '~> 5.0.1'
+
+gem 'stripe'
 
 group :development, :test do
   gem 'mysql'

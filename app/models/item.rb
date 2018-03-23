@@ -11,6 +11,30 @@ class Item < ActiveRecord::Base
   validates_presence_of :town_name
   validates_presence_of :price
   
+  def self.get_by_locations(arr)
+    query = ""
+    arr.each do |v|
+      if query == "" then
+        query = "town_name like '" << v << "'"
+      else
+        query <<= " or town_name like '" << v << "'"
+      end
+    end
+    where(query)
+  end
+
+  def self.get_by_families(arr)
+    query = ""
+    arr.each do |v|
+      if query == "" then
+        query = "family_name like '" << v << "'"
+      else
+        query <<= " or family_name like '" << v << "'"
+      end
+    end
+    where(query)
+  end
+  
   def self.lookup_location(term)
     where("lower(town_name) like (?)", "%#{term.downcase}%")
   end
@@ -19,8 +43,8 @@ class Item < ActiveRecord::Base
     where("lower(family_name) like (?)", "%#{term.downcase}%")
   end
 
-  def self.lookup_price(term)
-    where("lower(price) like (?)", "%#{term.downcase}%")
+  def self.lookup_price(a, b)
+    where("items.price >= #{a} and items.price <= #{b}")
   end
   
   def self.tagged_with(name)

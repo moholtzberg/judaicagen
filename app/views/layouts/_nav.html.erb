@@ -10,7 +10,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Judaica Gen</a>
+			<%= link_to "Judaica Gen", home_path, :class => 'navbar-brand' %>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,17 +23,19 @@
 				<div class="form-group">
 					<input type="text" class="form-control" placeholder="Search by Location" name="location">
 				</div>
+				
 				<button type="submit" class="btn btn-default">Submit</button>
+				<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#filtering_panel">Filters</button>
 			</form>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><%= link_to "Create a Lising", new_listing_path %></li>
+				<li><%= link_to "Create a Listing", new_listing_path %></li>
 				<% if current_user %>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome <%= current_user.user_name %> <span class="caret"></span></a>
 					
 					<ul class="dropdown-menu">
-						<li><%= link_to "My Listings", my_listing_path %></li>
+						<li><%= link_to "My Listings", my_listings_path %></li>
 						<li><a href="#">Another action</a></li>
 						<li><a href="#">Something else here</a></li>
 						<li role="separator" class="divider"></li>

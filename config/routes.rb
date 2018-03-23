@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  
+
+  get 'items/:id', to: 'items#show'
   authenticate :user do
     resources 'items'
-    get 'my_listing', to: 'items#my_listing'
+    get 'my_listings', to: 'items#my_listings'
   end
   
   devise_for :users, :controllers => {:sessions => 'sessions', :registrations => 'registrations'}

@@ -15,3 +15,10 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+function reload() {
+	location.href = "/";
+}
+
+$(function() {
+	$("#filtering_panel").insertBefore($("#listings_cont>div").first());
+});

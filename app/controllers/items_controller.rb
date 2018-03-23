@@ -6,14 +6,28 @@ class ItemsController < ApplicationController
   # GET /items.json
   def index
     @items = Item.all
-    @items = @items.lookup_location(params[:location]) if params[:location].present?
-    @items = @items.lookup_price(params[:price]) if params[:price].present?
-    @items = @items.lookup_family(params[:family]) if params[:family].present?
-    @items = @items.tagged_with(params[:tag]) if params[:tag].present?
-    @items = @items.where(owner_id: User.find_by(user_name: params[:owner]).id) if params[:owner].present?
+    if params[:filtering] then
+      families = Array.new
+      locations = Array.new
+      params.each do |key, val|
+        k = key.split("--")[0]
+        v = key.split("--")[1]
+        if k == 'family' then families << v
+        elsif k == 'location' then locations << v
+        end
+      end
+      @items = @items.lookup_price(params[:min_price], params[:max_price]) if params[:min_price].present? and params[:max_price].present?
+      @items = @items.get_by_locations(locations) unless locations.empty?
+      @items = @items.get_by_families(families) unless families.empty?
+    else
+      @items = @items.lookup_location(params[:location]) if params[:location].present?
+      @items = @items.lookup_family(params[:family]) if params[:family].present?
+      @items = @items.tagged_with(params[:tag]) if params[:tag].present?
+      @items = @items.where(owner_id: User.find_by(user_name: params[:owner]).id) if params[:owner].present?
+    end
   end
 
-  def my_listing
+  def my_listings
     @items = Item.where(:owner_id => current_user.id)
     render :index
   end
