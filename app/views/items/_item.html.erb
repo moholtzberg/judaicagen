@@ -1,4 +1,4 @@
-<div id="item_<%= item.id %>" class="col-md-3">
+<div id="item_<%= item.id %>" class="col-md-3 item">
   <div class="panel panel-default">
     <div class="panel-heading">
       <%= item.title %>
@@ -32,11 +32,19 @@
           <% end %>
       </li>
       <% end %>
-      <% if current_user.nil? or item.owner.id != current_user.id %>
+      <% if current_user and item.owner.id != current_user.id %>
         <li>
-          <a href=""><span class="glyphicon glyphicon-shopping-cart"></span> Buy</a>
+          <a data-toggle="modal" data-target="#myModal" onclick="window.item_id = <%= item.id %>">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+          </a>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to(new_user_session_path) do %>
+            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
+          <% end %>
         </li>
       <% end %>
     </ul>
-  </div>  
+  </div>
 </div>

@@ -1,0 +1,31 @@
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_tag(pay_path, method: 'post', id: 'payment-form') do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<h4 class="modal-title">Payment credentials</h4>
+				</div>
+				<div class="form-row modal-body">
+					<label for="name">
+						Full name
+					</label>
+					 <%= text_field_tag :client_name, nil, :class => "form-control" %>
+					 <label for="email">
+						Email
+					</label>
+					 <%= text_field_tag :email, nil, :class => "form-control" %>
+					<label for="card-element">
+						Credit or debit card
+					</label>
+					<div id="card-element">
+					</div>
+					<div id="card-errors" role="alert"></div>
+				</div>
+				<div class="modal-footer">
+					<%= submit_tag "Submit", :class => "btn btn-primary submit_btn" %> or <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>

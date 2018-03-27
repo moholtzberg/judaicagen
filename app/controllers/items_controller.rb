@@ -5,7 +5,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = Item.where "deleted = 'false' or deleted IS NULL"
+    @filters = @items.clone
     if params[:filtering] then
       families = Array.new
       locations = Array.new
@@ -24,6 +25,11 @@ class ItemsController < ApplicationController
       @items = @items.lookup_family(params[:family]) if params[:family].present?
       @items = @items.tagged_with(params[:tag]) if params[:tag].present?
       @items = @items.where(owner_id: User.find_by(user_name: params[:owner]).id) if params[:owner].present?
+    end
+    if params[:sold].present?
+      @items = Item.where "sold = '1'"
+    else
+      @items = @items.where "sold = 'false' or sold IS NULL"
     end
   end
 
@@ -92,7 +98,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.json
   def destroy
-    @item.destroy
+    @item.update(:deleted => 'true')
     respond_to do |format|
       format.html { redirect_to items_url, notice: 'Item was successfully destroyed.' }
       format.json { head :no_content }

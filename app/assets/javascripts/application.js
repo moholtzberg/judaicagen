@@ -18,7 +18,3 @@
 function reload() {
 	location.href = "/";
 }
-
-$(function() {
-	$("#filtering_panel").insertBefore($("#listings_cont>div").first());
-});

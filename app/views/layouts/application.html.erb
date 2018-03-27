@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JudaicaGen</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title>JudaicaGen</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'https://js.stripe.com/v3/', 'data-turbolinks-track' => true %>
+	<script>
+		var stripe = Stripe('<%= Rails.application.secrets.stripe_publishable_key %>');
+	</script>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
 </head>
 
 <body>
@@ -17,7 +21,7 @@
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-			
+
 			</div>
 		</div>
 	</div>

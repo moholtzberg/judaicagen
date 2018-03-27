@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'items/:id', to: 'items#show'
   authenticate :user do
     resources 'items'
+    post 'pay', to: 'payments#create', as: :pay
     get 'my_listings', to: 'items#my_listings'
   end
   

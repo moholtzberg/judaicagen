@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308174722) do
+ActiveRecord::Schema.define(version: 20180327163205) do
 
   create_table "images", force: :cascade do |t|
     t.integer "item_id",     limit: 4
@@ -34,7 +34,20 @@ ActiveRecord::Schema.define(version: 20180308174722) do
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
     t.decimal  "price",                     precision: 10, scale: 2
+    t.boolean  "deleted"
+    t.boolean  "sold"
   end
+
+  create_table "payments", force: :cascade do |t|
+    t.string   "client_name", limit: 255
+    t.integer  "item_id",     limit: 4
+    t.string   "email",       limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "card_token",  limit: 255
+  end
+
+  add_index "payments", ["item_id"], name: "index_payments_on_item_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id",     limit: 4
