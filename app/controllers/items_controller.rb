@@ -26,15 +26,18 @@ class ItemsController < ApplicationController
       @items = @items.tagged_with(params[:tag]) if params[:tag].present?
       @items = @items.where(owner_id: User.find_by(user_name: params[:owner]).id) if params[:owner].present?
     end
-    if params[:sold].present?
-      @items = Item.where "sold = '1'"
-    else
-      @items = @items.where "sold = 'false' or sold IS NULL"
-    end
+    @items = @items.where "sold = 'false' or sold IS NULL"
   end
 
   def my_listings
     @items = Item.where(:owner_id => current_user.id)
+    @filters = @items.clone
+    render :index
+  end
+
+  def my_sold_listings
+    @items = Item.where(:owner_id => current_user.id, :sold => '1')
+    @filters = @items.clone
     render :index
   end
 

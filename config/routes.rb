@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources 'items'
     post 'pay', to: 'payments#create', as: :pay
     get 'my_listings', to: 'items#my_listings'
+    get 'my_sold_listings', to: 'items#my_sold_listings'
   end
   
   devise_for :users, :controllers => {:sessions => 'sessions', :registrations => 'registrations'}

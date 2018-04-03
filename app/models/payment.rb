@@ -13,5 +13,6 @@ class Payment < ActiveRecord::Base
                           currency: "usd"
 
     item.update(:sold => 'true')
+    UserMailer.sold_email(item).deliver_later
   end
 end

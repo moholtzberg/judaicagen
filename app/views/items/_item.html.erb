@@ -1,10 +1,14 @@
 <div id="item_<%= item.id %>" class="col-md-3 item">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= item.title %>
-      <% if !current_user.nil? and controller.action_name == 'my_listings' %>
-        <%= render "item_actions", item: item %>
-      <% end %>
+      <h3 class="panel-title"><%= item.title %>
+        <% if !current_user.nil? and controller.action_name == 'my_listings' %>
+          <%= render "item_actions", item: item %>
+        <% end %>
+        <% if item.sold %>
+          <span class="label label-default">SOLD</span>
+        <% end %>
+      </h3>
     </div>
     
     <div class="panel-body">
@@ -28,22 +32,24 @@
       <li>
           <%= link_to(item) do %>
           <span class="glyphicon glyphicon-info-sign">
-          </span> More
+          </span> More 
           <% end %>
       </li>
       <% end %>
-      <% if current_user and item.owner.id != current_user.id %>
-        <li>
-          <a data-toggle="modal" data-target="#myModal" onclick="window.item_id = <%= item.id %>">
-            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
-          </a>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to(new_user_session_path) do %>
-            <span class="glyphicon glyphicon-shopping-cart"></span> Buy
-          <% end %>
-        </li>
+      <% if !item.sold %>
+        <% if current_user and item.owner_id != current_user.id %>
+          <li>
+            <a data-toggle="modal" data-target="#myModal" onclick="window.item_id = <%= item.id %>">
+              <span class="glyphicon glyphicon-shopping-cart"></span> Buy 
+            </a>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to(new_user_session_path) do %>
+              <span class="glyphicon glyphicon-shopping-cart"></span> Buy 
+            <% end %>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
