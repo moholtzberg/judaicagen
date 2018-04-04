@@ -1,33 +1,50 @@
 <%= form_for @item, :html => {:class => "form-horizontal", :multipart => true} do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
-	  
-      <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @item.errors.any? %>
+<div id="error_explanation">
+    <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-  <div class="actions">
-	  <%= f.text_field :title %>
-	  <%= f.text_area :description %>
-	  <%= f.text_field :family_name %>
-	  <%= f.text_field :town_name %>
-	  
-	  <div class="field">
-	    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-	    <%= f.text_field :tag_list %>
-	  </div>
-	  
-	  <%= f.fields_for :item_images do |p| %>
-	       <div class="field">
-	         <%= p.label :image %><br>
-	         <%= p.file_field :image, :multiple => true, name: "images[image][]" %>
-	       </div>
-	     <% end %>
-    <%= f.submit %>
-  </div>
+    <ul>
+        <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="actions">
+    <div class="form-group">
+        <%= f.text_field :title, :placeholder => "Enter a title for your listing", :class => "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= f.number_field :price, :placeholder => "Enter a price for your listing", :class => "form-control", :step => 0.01 %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.text_field :family_name, :placeholder => "Enter a family name for your listing", :class => "form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.text_field :town_name, :placeholder => "Enter a location for your listing", :class => "form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.text_area :description, :placeholder => "Please describe you item in more detail", :class => "form-control" %>
+    </div>
+    
+    <%= f.fields_for :item_images do |p| %>
+    <div class="form-group">
+        <%= p.label "Upload some images" %><br>
+        <%= p.file_field :image, :multiple => true, name: "images[image][]" %>
+    </div>
+    <% end %>
+    
+    <div class="form-group">
+        <%= f.text_field :tag_list, :placeholder => "Enter Tags (separated by commas)", :class => "form-control" %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.submit "Save Listing", :class => "btn btn-primary" %> or <%= link_to "Back to Listings", home_path, :class => "btn btn-default" %>
+    </div>
+</div>
 <% end %>

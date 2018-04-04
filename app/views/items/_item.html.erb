@@ -1,0 +1,56 @@
+<div id="item_<%= item.id %>" class="col-md-3 item">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= item.title %>
+        <% if !current_user.nil? and controller.action_name == 'my_listings' %>
+          <%= render "item_actions", item: item %>
+        <% end %>
+        <% if item.sold %>
+          <span class="label label-default">SOLD</span>
+        <% end %>
+      </h3>
+    </div>
+    
+    <div class="panel-body">
+      <% if item.images.count > 0 %>
+      <%= image_tag(item.images.first.image_url, :size => "280x200") %>
+      <% end %>
+    </div>
+    
+    <div class="panel-footer">
+      <span class="badge"><%= raw item.price unless item.price.nil?%>&dollar;</span>
+      <br/>
+      Family Name: <%= link_to item.family_name, family_path(item.family_name) unless item.family_name.nil?%><br/>
+      Location: <%= link_to item.town_name, location_path(item.town_name) unless item.town_name.nil? %><br/>
+      <% if controller.action_name == 'show' %>
+        Tags: <%= raw item.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %><br/>
+        By: <%= link_to item.owner.user_name, owner_path(item.owner.user_name) unless (item.owner.nil? || item.owner.user_name.blank?) %>
+      <% end %>
+    </div>
+    <ul class="nav nav-pills">
+      <% if !['show', 'my_listings'].include? controller.action_name %>
+      <li>
+          <%= link_to(item) do %>
+          <span class="glyphicon glyphicon-info-sign">
+          </span> More 
+          <% end %>
+      </li>
+      <% end %>
+      <% if !item.sold %>
+        <% if current_user and item.owner_id != current_user.id %>
+          <li>
+            <a data-toggle="modal" data-target="#myModal" onclick="window.item_id = <%= item.id %>">
+              <span class="glyphicon glyphicon-shopping-cart"></span> Buy 
+            </a>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to(new_user_session_path) do %>
+              <span class="glyphicon glyphicon-shopping-cart"></span> Buy 
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

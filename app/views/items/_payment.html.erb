@@ -1,0 +1,63 @@
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_tag(pay_path, method: 'post', id: 'payment-form') do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<h4 class="modal-title">Payment credentials</h4>
+				</div>
+				<div class="form-row modal-body">
+					<label for="card-element">
+						Credit or debit card
+					</label>
+					<div id="card-element">
+					</div>
+					<div id="card-errors" role="alert"></div>
+				</div>
+				<div class="modal-footer">
+					<%= submit_tag "Submit", :class => "btn btn-primary submit_btn" %> or <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+$(function() {
+    var stripe = Stripe($('meta[name="stripe-key"]').attr('content'));
+
+    var elements = stripe.elements();
+
+    var card = elements.create('card');
+
+    card.mount('#card-element');
+
+    card.addEventListener('change', function(event) {
+      var displayError = $('#card-errors');
+      if (event.error) {
+        displayError.textContent = event.error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+
+    $('#payment-form .submit_btn').on('click', function(event) {
+      event.preventDefault();
+
+      stripe.createToken(card).then(function(result) {
+        if (result.error) {
+          var errorElement = $('#card-errors');
+          errorElement.textContent = result.error.message;
+        } else {
+          stripeTokenHandler(result.token);
+        }
+      });
+    });
+
+    function stripeTokenHandler(token) {
+      $('#payment-form').append($('<input type="hidden" name="card_token" value="'+token.id+'">'));
+      $('#payment-form').append($('<input type="hidden" name="item_id" value="'+item_id+'">'));
+      $('#payment-form').submit();
+    }
+});
+</script>

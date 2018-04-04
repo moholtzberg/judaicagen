@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JudaicaGen</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title>JudaicaGen</title>
+	<%= csrf_meta_tags %>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= tag :meta, :name => "stripe-key", :content => Rails.application.secrets.stripe_publishable_key %>
 </head>
 
 <body>
-	
 	<%= render :partial => "layouts/nav" %>
 	
 	<div class="col-md-12">
@@ -18,7 +18,7 @@
 	<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-			
+
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
-app_dir = "/home/rails/judaicagen/current"
-shared_dir = "/home/rails/judaicagen/shared"
+app_dir = File.expand_path("../", __FILE__)
+shared_dir = "#{app_dir}/shared"
 working_directory app_dir
 
 # Set unicorn options
